@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Template Generator</title>
+    <!-- Include the commons-website CSS and project custom CSS -->
+    <link rel="stylesheet" href="commons-website/common-styles.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="controls">
+        <button id="clearBtn">Clear</button>
+        <div class="slider-group">
+            <label for="sizeSlider">Point Size: <span id="sizeDisplay">1px</span></label>
+            <input type="range" id="sizeSlider" min="1" max="20" value="1">
+        </div>
+    </div>
+    <main class="canvas-container">
+        <canvas id="mathCanvas"></canvas>
+    </main>
+
+    <script src="ball-generator.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

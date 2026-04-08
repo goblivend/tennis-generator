@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0f1626;
+    /* Dark background matching the screenshot aesthetic */
+    overflow: hidden;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 10;
+    min-width: 180px;
+    border: 1px solid #e0e0e0;
+}
+
+.controls button {
+    padding: 10px 16px;
+    cursor: pointer;
+    background-color: #ef4444;
+    /* Clean modern red */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.controls button:hover {
+    background-color: #dc2626;
+}
+
+.controls button:active {
+    transform: scale(0.98);
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+}
+
+.slider-group input[type="range"] {
+    cursor: pointer;
+    width: 100%;
+    accent-color: #3b82f6;
+    /* Modern blue slider */
+}
+
+.canvas-container {
+    /* Square container taking max available space while preserving aspect ratio */
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    padding: 2vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: white;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    border-radius: 4px;
+}
