@@ -1,6 +1,7 @@
 const canvas = document.getElementById('mathCanvas');
 const ctx = canvas.getContext('2d');
 const clearBtn = document.getElementById('clearBtn');
+const saveBtn = document.getElementById('saveBtn');
 const sizeSlider = document.getElementById('sizeSlider');
 const sizeDisplay = document.getElementById('sizeDisplay');
 
@@ -72,6 +73,22 @@ clearBtn.addEventListener('click', () => {
     generatedDots.length = 0;
     // Keep arcCenter intact so the current shape is not cleared
     draw();
+});
+
+saveBtn.addEventListener('click', () => {
+    // Generate image by capturing current state over a white background
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = canvas.width;
+    exportCanvas.height = canvas.height;
+    const eCtx = exportCanvas.getContext('2d');
+    eCtx.fillStyle = 'white';
+    eCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+    eCtx.drawImage(canvas, 0, 0);
+
+    const link = document.createElement('a');
+    link.download = 'tennis-pattern.png';
+    link.href = exportCanvas.toDataURL('image/png');
+    link.click();
 });
 
 sizeSlider.addEventListener('input', (e) => {

@@ -30,6 +30,9 @@ The user can select between two input modes: Freehand and Arc Tool.
 6. `generatePoints` is intended to be a user-implemented exercise (stubbed by default). The return value must be an array of points derived from the input.
 7. A mathematical helper `findIntersectingPoint(angle, points)` is provided to cast a ray from `(0.5, 0)` and discover geometric point intersections based on the canvas scale.
 
+### Exporting
+1. User clicks the "Save Image" button to save the entire content of the canvas as a PNG image, allowing for print and saving mechanisms.
+
 ## Rendering Pipeline
 1. Clear the canvas area.
 2. Draw the X and Y axes dividing the visible plane spanning `{x: -1..1, y: -1..1}`.

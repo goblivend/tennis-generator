@@ -12,7 +12,10 @@
 
 <body>
     <div class="controls">
-        <button id="clearBtn">Clear</button>
+        <div style="display: flex; gap: 8px;">
+            <button id="clearBtn" style="flex: 1;">Clear</button>
+            <button id="saveBtn" style="flex: 1; background-color: #10b981;">Save Image</button>
+        </div>
         <div class="slider-group">
             <label for="sizeSlider">Point Size: <span id="sizeDisplay">1px</span></label>
             <input type="range" id="sizeSlider" min="1" max="20" value="1">
