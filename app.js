@@ -7,6 +7,8 @@ const sizeDisplay = document.getElementById('sizeDisplay');
 let generatedDots = []; // Cumulative dots to render across resizes
 let isDragging = false;
 let pointSize = 1;
+let lastMathX = null;
+let lastMathY = null;
 
 clearBtn.addEventListener('click', () => {
     historicalPoints.length = 0; // Clear the array from ball-generator.js
@@ -108,7 +110,11 @@ function draw() {
 
 /** Intercept correct coordinates and filter */
 function handleInput(e) {
-    if (!isDragging && e.type !== 'mousedown') return;
+    if (!isDragging && e.type !== 'mousedown') {
+        lastMathX = null;
+        lastMathY = null;
+        return;
+    }
 
     const rect = canvas.getBoundingClientRect();
 
@@ -124,7 +130,34 @@ function handleInput(e) {
     const mathY = 1 - (relativeY / (cssHeight / 2));
 
     // Ignore anything outside the top right, positive quadrant (Quad I)
-    if (mathX <= 0 || mathY <= 0) return;
+    if (mathX <= 0 || mathY <= 0) {
+        lastMathX = null;
+        lastMathY = null;
+        return;
+    }
+
+    // Interpolate points when dragging mouse fast to ensure continuous dense circles
+    if (e.type === 'mousemove' && lastMathX !== null && lastMathY !== null) {
+        const dx = mathX - lastMathX;
+        const dy = mathY - lastMathY;
+        const mathDistance = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate maximum gap between points (approx. 1/4th of the point's size in math coordinates)
+        const pointMathSize = (pointSize / cssWidth) * 2;
+        const maxGap = Math.max(pointMathSize * 0.25, 2 / cssWidth);
+
+        if (mathDistance > maxGap) {
+            const steps = Math.ceil(mathDistance / maxGap);
+            for (let i = 1; i < steps; i++) {
+                const interpX = lastMathX + dx * (i / steps);
+                const interpY = lastMathY + dy * (i / steps);
+
+                const interpGenedPoints = generatePoints(interpX, interpY, historicalPoints);
+                historicalPoints.push({ x: interpX, y: interpY, size: pointSize });
+                generatedDots.push(...interpGenedPoints.map(p => ({ ...p, size: pointSize })));
+            }
+        }
+    }
 
     // Trigger AI-forbidden logic implemented by user
     const newlyGeneratedPoints = generatePoints(mathX, mathY, historicalPoints);
@@ -136,11 +169,16 @@ function handleInput(e) {
     const pointsWithSize = newlyGeneratedPoints.map(p => ({ ...p, size: pointSize }));
     generatedDots.push(...pointsWithSize);
 
+    lastMathX = mathX;
+    lastMathY = mathY;
+
     draw();
 }
 
 canvas.addEventListener('mousedown', (e) => {
     isDragging = true;
+    lastMathX = null;
+    lastMathY = null;
     handleInput(e);
 });
 
@@ -148,10 +186,14 @@ canvas.addEventListener('mousemove', handleInput);
 
 canvas.addEventListener('mouseup', () => {
     isDragging = false;
+    lastMathX = null;
+    lastMathY = null;
 });
 
 canvas.addEventListener('mouseleave', () => {
     isDragging = false;
+    lastMathX = null;
+    lastMathY = null;
 });
 
 // Setup

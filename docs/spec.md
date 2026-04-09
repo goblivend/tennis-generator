@@ -17,6 +17,7 @@ The canvas maps standard pixel coordinates into a mathematical cartesian plane:
 4. If the coordinate is in quadrant I ($x > 0$ and $y > 0$), it is captured.
 5. The coordinates, along with historical previous coordinates, are passed to `generatePoints(clickX, clickY, previousPoints)` located in `ball-generator.js`.
 6. `generatePoints` is intended to be a user-implemented exercise (stubbed by default). The return value must be an array of points derived from the input.
+7. A mathematical helper `findIntersectingPoint(angle, points)` is provided to cast a ray from `(0.5, 0)` and discover geometric point intersections based on the canvas scale.
 
 ## Rendering Pipeline
 1. Clear the canvas area.
