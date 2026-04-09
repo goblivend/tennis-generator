@@ -70,3 +70,12 @@ The user can select between two input modes: Freehand and Arc Tool.
 - Files:
   - `app.js` handles DOM interaction, canvas context math mapping, resize loops, and the symmetry drawing pipeline.
   - `ball-generator.js` purely acts as an algorithmic state storage and user exercise module.
+
+### Refactoring Architecture (2026 Update)
+To improve maintainability, `app.js` is structurally modularized into multiple focused scopes inside the `js/` directory:
+- `js/globals.js`: DOM selectors and application runtime state (variables and configuration bindings).
+- `js/math.js`: Coordinate conversion functions mapping Cartesian coordinates (`cx`, `cy`) to canvas pixels. 
+- `js/shapes.js`: Algorithmic generators interpolating and applying geometric steps for Freehand, Arc, Line, Polygon, and Star shapes.
+- `js/render.js`: The central `draw()` loop executing symmetry pipelines and visual tools preview states.
+- `js/events.js`: Interaction router decoding mouse/touch actions via `handleInput()` to manipulate tool-specific coordinates.
+- `js/main.js`: Core initialization script tying together resize observers and bootstrap logic.
