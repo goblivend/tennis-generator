@@ -11,11 +11,22 @@ The canvas maps standard pixel coordinates into a mathematical cartesian plane:
 - Aspect ratio: Fixed 1:1 (Responsive to window dimensions)
 
 ## Interaction Logic
+The user can select between two input modes: Freehand and Arc Tool.
+
+### Freehand Mode
 1. User clicks or drags inside the canvas.
 2. Continually interpolates mouse events (mousedown + mousemove).
 3. If the coordinate falls inside quadrants II, III, or IV (i.e. $x \le 0$ or $y \le 0$), it is ignored.
 4. If the coordinate is in quadrant I ($x > 0$ and $y > 0$), it is captured.
 5. The coordinates, along with historical previous coordinates, are passed to `generatePoints(clickX, clickY, previousPoints)` located in `ball-generator.js`.
+
+### Arc Tool Mode
+1. User selects "Arc Tool" from the mode dropdown.
+2. User clicks on the canvas to set a dummy center point for the arc (can be placed anywhere, even outside Quadrant I). Additionally, the user can manually set exact X and Y coordinates (between -1.0 and 1.0) using the provided numeric input fields.
+3. A visual preview of the arc is displayed, featuring a green sweep with blue and purple markers for start and end angles.
+4. User configures Arc Radius, Start Angle, End Angle, and Sweep Direction (Trigonometric CCW or Anti-Trig CW).
+5. User clicks "Commit Arc Points" to iterate over the arc mathematically. Each valid Quadrant I point along the arc is individually passed to `generatePoints(clickX, clickY, previousPoints)`. The arc center persists after committing.
+
 6. `generatePoints` is intended to be a user-implemented exercise (stubbed by default). The return value must be an array of points derived from the input.
 7. A mathematical helper `findIntersectingPoint(angle, points)` is provided to cast a ray from `(0.5, 0)` and discover geometric point intersections based on the canvas scale.
 
