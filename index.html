@@ -25,17 +25,22 @@
             <select id="modeDropdown" style="width: 100%; padding: 4px; border-radius: 4px;">
                 <option value="freehand">Freehand</option>
                 <option value="arc">Arc Tool</option>
+                <option value="line">Line Tool</option>
+                <option value="polygon">Polygon Tool</option>
+                <option value="star">Star Tool</option>
             </select>
         </div>
         <div id="arcControls" style="display: none; flex-direction: column; gap: 16px;">
             <div class="slider-group" style="display: flex; gap: 8px;">
                 <div>
                     <label for="arcXInput">Center X:</label>
-                    <input type="number" id="arcXInput" min="-1" max="1" step="0.01" value="0.5" style="width: 100%; padding: 4px; border-radius: 4px;">
+                    <input type="number" id="arcXInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
                 </div>
                 <div>
                     <label for="arcYInput">Center Y:</label>
-                    <input type="number" id="arcYInput" min="-1" max="1" step="0.01" value="0.5" style="width: 100%; padding: 4px; border-radius: 4px;">
+                    <input type="number" id="arcYInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
                 </div>
             </div>
             <div class="slider-group">
@@ -53,11 +58,132 @@
             <div class="slider-group">
                 <label>Direction:</label>
                 <div style="display: flex; gap: 10px;">
-                    <label style="font-weight: normal;"><input type="radio" name="arcDirection" value="1" checked> Trigo (CCW)</label>
-                    <label style="font-weight: normal;"><input type="radio" name="arcDirection" value="-1"> Anti (CW)</label>
+                    <label style="font-weight: normal;"><input type="radio" name="arcDirection" value="1" checked> Trigo
+                        (CCW)</label>
+                    <label style="font-weight: normal;"><input type="radio" name="arcDirection" value="-1"> Anti
+                        (CW)</label>
                 </div>
             </div>
             <button id="commitArcBtn" style="background-color: #3b82f6;">Commit Arc</button>
+        </div>
+        <div id="lineControls" style="display: none; flex-direction: column; gap: 16px;">
+            <div class="slider-group" style="display: flex; gap: 8px;">
+                <div>
+                    <label for="lineStartXInput">Start X:</label>
+                    <input type="number" id="lineStartXInput" min="-1" max="1" step="0.01" value="0.2"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+                <div>
+                    <label for="lineStartYInput">Start Y:</label>
+                    <input type="number" id="lineStartYInput" min="-1" max="1" step="0.01" value="0.2"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+            </div>
+            <div class="slider-group" style="display: flex; gap: 8px;">
+                <div>
+                    <label for="lineEndXInput">End X:</label>
+                    <input type="number" id="lineEndXInput" min="-1" max="1" step="0.01" value="0.8"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+                <div>
+                    <label for="lineEndYInput">End Y:</label>
+                    <input type="number" id="lineEndYInput" min="-1" max="1" step="0.01" value="0.8"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+            </div>
+            <button id="commitLineBtn" style="background-color: #3b82f6;">Commit Line</button>
+        </div>
+        <div id="polygonControls" style="display: none; flex-direction: column; gap: 16px;">
+            <div class="slider-group" style="display: flex; gap: 8px;">
+                <div>
+                    <label for="polygonXInput">Center X:</label>
+                    <input type="number" id="polygonXInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+                <div>
+                    <label for="polygonYInput">Center Y:</label>
+                    <input type="number" id="polygonYInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+            </div>
+            <div class="slider-group">
+                <label>Sides: <span id="polygonSidesDisplay">4</span></label>
+                <input type="range" id="polygonSidesSlider" min="3" max="12" step="1" value="4">
+            </div>
+            <div class="slider-group">
+                <label>Radius: <span id="polygonRadiusDisplay">0.50</span></label>
+                <input type="range" id="polygonRadiusSlider" min="0.1" max="1.0" step="0.05" value="0.5">
+            </div>
+            <div class="slider-group">
+                <label>Rotation: <span id="polygonRotationDisplay">0°</span></label>
+                <input type="range" id="polygonRotationSlider" min="0" max="360" step="1" value="0">
+            </div>
+            <div class="slider-group">
+                <label>Start Angle: <span id="polygonStartDisplay">0</span>°</label>
+                <input type="range" id="polygonStartSlider" min="0" max="360" value="0">
+            </div>
+            <div class="slider-group">
+                <label>End Angle: <span id="polygonEndDisplay">360</span>°</label>
+                <input type="range" id="polygonEndSlider" min="0" max="360" value="360">
+            </div>
+            <div class="slider-group">
+                <label>Direction:</label>
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal;"><input type="radio" name="squareDirection" value="1" checked>
+                        Trigo (CCW)</label>
+                    <label style="font-weight: normal;"><input type="radio" name="squareDirection" value="-1"> Anti
+                        (CW)</label>
+                </div>
+            </div>
+            <button id="commitPolygonBtn" style="background-color: #3b82f6;">Commit Polygon</button>
+        </div>
+        <div id="starControls" style="display: none; flex-direction: column; gap: 16px;">
+            <div class="slider-group" style="display: flex; gap: 8px;">
+                <div>
+                    <label for="starXInput">Center X:</label>
+                    <input type="number" id="starXInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+                <div>
+                    <label for="starYInput">Center Y:</label>
+                    <input type="number" id="starYInput" min="-1" max="1" step="0.01" value="0.5"
+                        style="width: 100%; padding: 4px; border-radius: 4px;">
+                </div>
+            </div>
+            <div class="slider-group">
+                <label>Points: <span id="starPointsDisplay">5</span></label>
+                <input type="range" id="starPointsSlider" min="3" max="12" step="1" value="5">
+            </div>
+            <div class="slider-group">
+                <label>Outer Radius: <span id="starOuterRadiusDisplay">0.40</span></label>
+                <input type="range" id="starOuterRadiusSlider" min="0.05" max="1.5" step="0.01" value="0.4">
+            </div>
+            <div class="slider-group">
+                <label>Inner Radius: <span id="starInnerRadiusDisplay">0.20</span></label>
+                <input type="range" id="starInnerRadiusSlider" min="0.05" max="1.5" step="0.01" value="0.2">
+            </div>
+            <div class="slider-group">
+                <label>Rotation: <span id="starRotationDisplay">0°</span></label>
+                <input type="range" id="starRotationSlider" min="0" max="360" step="1" value="0">
+            </div>
+            <div class="slider-group">
+                <label>Start Angle: <span id="starStartDisplay">0</span>°</label>
+                <input type="range" id="starStartSlider" min="0" max="360" value="0">
+            </div>
+            <div class="slider-group">
+                <label>End Angle: <span id="starEndDisplay">360</span>°</label>
+                <input type="range" id="starEndSlider" min="0" max="360" value="360">
+            </div>
+            <div class="slider-group">
+                <label>Direction:</label>
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal;"><input type="radio" name="starDirection" value="1" checked>
+                        Trigo (CCW)</label>
+                    <label style="font-weight: normal;"><input type="radio" name="starDirection" value="-1"> Anti
+                        (CW)</label>
+                </div>
+            </div>
+            <button id="commitStarBtn" style="background-color: #3b82f6;">Commit Star</button>
         </div>
     </div>
     <main class="canvas-container">

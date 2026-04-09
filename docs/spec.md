@@ -27,6 +27,26 @@ The user can select between two input modes: Freehand and Arc Tool.
 4. User configures Arc Radius, Start Angle, End Angle, and Sweep Direction (Trigonometric CCW or Anti-Trig CW).
 5. User clicks "Commit Arc Points" to iterate over the arc mathematically. Each valid Quadrant I point along the arc is individually passed to `generatePoints(clickX, clickY, previousPoints)`. The arc center persists after committing.
 
+### Line Tool Mode
+1. User selects "Line Tool" from the mode dropdown.
+2. User clicks/drags on the canvas to set a Start and End handle, which can also be exactly dialed via numeric inputs.
+3. A visual preview of the straight line between the two markers and its generating points is shown.
+4. User clicks "Commit Line" to interpolate points from Start to End proportionally to the line distance and `pointSize`, passing each point to `generatePoints`.
+
+### Square Tool Mode
+1. User selects "Square Tool" from the mode dropdown.
+2. User clicks/drags on the canvas to set the Center of the square.
+3. User customizes Width and Height via slider inputs.
+4. A visual outline of the axis-aligned rectangle and generating points is mapped based on parameters.
+5. User clicks "Commit Square" to iterate mathematical interpolation across all four edges of the shape, emitting their dots to `generatePoints`.
+
+### Star Tool Mode
+1. User selects "Star Tool" from the mode dropdown.
+2. User clicks/drags on the canvas to set the Center of the star.
+3. User customizes the Number of Points, Outer Radius, and Inner Radius via slider inputs.
+4. A visual outline of the star polygon is mathematically drawn spanning $360^{\circ}$.
+5. User clicks "Commit Star" to iterate mathematical interpolation over every line segment connecting the inner and outer vertices, passing them to `generatePoints`.
+
 6. `generatePoints` is intended to be a user-implemented exercise (stubbed by default). The return value must be an array of points derived from the input.
 7. A mathematical helper `findIntersectingPoint(angle, points)` is provided to cast a ray from `(0.5, 0)` and discover geometric point intersections based on the canvas scale.
 
