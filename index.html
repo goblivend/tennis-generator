@@ -11,10 +11,37 @@
 </head>
 
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">Tennis ball Template Generator</a>
+            </div>
+            <div class="nav-right">
+                <div class="theme-container">
+                    <label class="theme-switch" title="Toggle dark mode">
+                        <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
+                        <span class="switch" aria-hidden="true">
+                            <!-- Sun icon -->
+                            <svg class="icon sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path
+                                    d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM17.24 19.16l1.79 1.79 1.79-1.79-1.79-1.79-1.79 1.79zM21 11v2h3v-2h-3zM12 6a6 6 0 100 12 6 6 0 000-12zm0 2a4 4 0 110 8 4 4 0 010-8zM4.24 19.16l1.79 1.79 1.79-1.79-1.79-1.79-1.79 1.79z" />
+                            </svg>
+                            <!-- Moon icon -->
+                            <svg class="icon moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M20.742 13.045A8.088 8.088 0 0111 4a8 8 0 108.742 9.045z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="controls">
         <div style="display: flex; gap: 8px;">
-            <button id="clearBtn" style="flex: 1;">Clear</button>
-            <button id="saveBtn" style="flex: 1; background-color: #10b981;">Save Image</button>
+            <button id="clearBtn" style="flex: 1; background-color: #ef4444;">Clear</button>
+            <button id="saveBtn" style="flex: 1; background-color: var(--accent-color);">Save Image</button>
         </div>
         <div class="slider-group">
             <label for="sizeSlider">Point Size: <span id="sizeDisplay">1px</span></label>
@@ -64,7 +91,7 @@
                         (CW)</label>
                 </div>
             </div>
-            <button id="commitArcBtn" style="background-color: #3b82f6;">Commit Arc</button>
+            <button id="commitArcBtn" style="background-color: var(--primary-color);">Commit Arc</button>
         </div>
         <div id="lineControls" style="display: none; flex-direction: column; gap: 16px;">
             <div class="slider-group" style="display: flex; gap: 8px;">
@@ -91,7 +118,7 @@
                         style="width: 100%; padding: 4px; border-radius: 4px;">
                 </div>
             </div>
-            <button id="commitLineBtn" style="background-color: #3b82f6;">Commit Line</button>
+            <button id="commitLineBtn" style="background-color: var(--primary-color);">Commit Line</button>
         </div>
         <div id="polygonControls" style="display: none; flex-direction: column; gap: 16px;">
             <div class="slider-group" style="display: flex; gap: 8px;">
@@ -135,7 +162,7 @@
                         (CW)</label>
                 </div>
             </div>
-            <button id="commitPolygonBtn" style="background-color: #3b82f6;">Commit Polygon</button>
+            <button id="commitPolygonBtn" style="background-color: var(--primary-color);">Commit Polygon</button>
         </div>
         <div id="starControls" style="display: none; flex-direction: column; gap: 16px;">
             <div class="slider-group" style="display: flex; gap: 8px;">
@@ -183,13 +210,14 @@
                         (CW)</label>
                 </div>
             </div>
-            <button id="commitStarBtn" style="background-color: #3b82f6;">Commit Star</button>
+            <button id="commitStarBtn" style="background-color: var(--primary-color);">Commit Star</button>
         </div>
     </div>
     <main class="canvas-container">
         <canvas id="mathCanvas"></canvas>
     </main>
 
+    <script src="commons-website/theme-toggle.js" defer></script>
     <script src="ball-generator.js"></script>
     <script src="js/globals.js"></script>
     <script src="js/utils.js"></script>

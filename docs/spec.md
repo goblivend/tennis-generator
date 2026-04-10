@@ -48,6 +48,12 @@ The user can select between two input modes: Freehand and Arc Tool.
 5. User clicks "Commit Star" to iterate mathematical interpolation over every line segment connecting the inner and outer vertices, passing them to `generatePoints`.
 
 6. `generatePoints` is intended to be a user-implemented exercise (stubbed by default). The return value must be an array of points derived from the input.
+
+## Styling and UI
+The application interface uses elements from a shared commons folder (`commons-website`) to maintain visual consistency across the broader portfolio.
+1. **Global Navigation and Theme**: The page includes a responsive navigation bar (`.navbar`) identical to the portfolio standard, ensuring coherent access and branding.
+2. **Dark/Light Mode**: The UI seamlessly adapts to system and user-toggled theme preferences using `theme-toggle.js`. The canvas interface's background, text, and floating panels use the shared CSS variables (e.g., `var(--bg-primary)`, `var(--text-dark)`).
+3. **Canvas Constraints**: While the surrounding interface shifts via theming, the rendering `<canvas>` maintains a stable background to ensure the exported mathematical template remains visually correct and high-contrast (e.g., white background with black/colored points).
 7. A mathematical helper `findIntersectingPoint(angle, points)` is provided to cast a ray from `(0.5, 0)` and discover geometric point intersections based on the canvas scale.
 
 ### Exporting
